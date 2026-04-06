@@ -1,0 +1,122 @@
+@media all and (max-width: 400px) and (min-width: 300px) {
+
+}
+
+@media all and (max-width: 767px) {
+    .scrollerbottom{right: 45%;}
+    .footerbg h5{margin-top: 15%;}
+    .footerbg ul{line-height: 2.4;}
+    .footerbg{padding-bottom: 60px;}
+    .section4 h3, .section3 h3, .section2 h3{font-size: 12px;}
+    .section4 h2, .section3 h2, .section2 h2{font-size: 20px;}
+    .section4 h2 span, .section3 h2 span, .section2 h2 span{font-size: 22px;}
+    .sec1box1{margin: 30px 0px;}
+    .icon1{display: none;}
+    .section3 p{font-size: 13px;}
+    .section2 ul li{font-size: 13px;}
+    .sec3box1 h3{font-size: 18px;}
+    .sec3box1{margin-top: 30px;}
+    .mainbannerbg{background-size: cover; height: 630px;}
+    .bannerbg{margin-top: 0%;}
+    .bannerbg h3{font-size: 13px; margin-top: 55% !important;}
+    .bannerbg h2{font-size: 40px;}
+    .bannerbg h2 span{font-size: 40px;}
+    .bannerbg p{font-size: 14px; width: 100%;}
+    .bannerbg ul li{font-size: 13px;}
+    .section5{background-size: cover;}
+    .section1{margin-top: 18%;}
+    .logo img{width: 100%;}
+    .socialmedia ul li a{color: #1E3932 !important;}
+    .headcall{background-color: #1E3932;}
+    .headcall a{color: #fff;}
+    .headcall iconify-icon{color: #fff;}
+    .afterloginnewheader{position: relative;}
+    #nav{margin: 0px !important;}
+    #nav ul { position:fixed !important; width:70% !important; left:0px; margin:-1px 0px 0px 0px !important; padding:20px; background-color:#1E3932 !important; height:100%;}
+    .loginmenu{margin: 20px 0px !important; border: 2px solid #fff !important; border-radius: 20px !important;}
+    .loginmenu a iconify-icon, .signupmenu a iconify-icon{float: right; left: 0px;}
+    .modal.in .modal-dialog{width: 92%;}
+    .modal-body .close{right: -19px;}
+    .noaccount{font-size: 11px;}
+    .createaccount{font-size: 14px;}
+    .checkbox input[type=checkbox]{margin-top: -1px;}
+    .checkbox{font-size: 10px;}
+    .form-control1{height: 50px !important;}
+    .aftrlogincontainer1 { margin-top: 1%;}
+    #innav{margin: 0px !important;}
+    #innav ul { position:fixed !important; width:70% !important; left:0px; margin:-1px 0px 0px 0px !important; padding:20px; background-color:#0C3C54 !important; height:100%;}
+    .afterlogcon1box1, .afterlogcon1box2{height: auto;}
+    .afterlogcon1box1 img, .afterlogcon1box2 img{width: 70%; margin-bottom: 15px;}
+    .mycontainer{width: 100% !important;}
+    .bellicon {margin-top: 84%;}
+    .afterloginlogo{margin-top: 10px; padding-left: 0%;}
+    .welcomemenu {margin-top: 2%; border-top: 1px solid #dddd; padding: 10px 0px;}
+    .breadcrumb ul li{font-size: 12px;}
+    .loginwhitebg{width: 100%; margin-left: 0%;}
+    .afterlogcon3box1{height: auto;}
+    .afterlogcon3box1 h4{float: left; margin-top: 10px !important;}
+    .modulemenu{background-color: transparent; height: auto;}
+    #modulenav{margin: 0px !important;}
+    #modulenav ul { position:fixed !important; width:70% !important; left:0px; margin:-1px 0px 0px 0px !important; padding:20px; background-color:#0C3C54 !important; height:100%;}
+    #modulenav a, #modulenav span.submenu{padding: 15px 15px !important; border-bottom: 1px dashed #fff !important;}
+    .submodulesection3{padding: 10px !important;}
+    .modulesection1 {margin-top: 0%;}
+    .graphinfo ul li{line-height: 3;}
+    .dropbtn{font-size: 13px; padding: 8px 10px;}
+    .batxt2{margin: 20px 0px 10px 0px;}
+    .modifybtn{float: left; margin: 20px 0px 0px 0px !important;}
+    .moddulenewheader{position: relative;}
+}
+
+@media all and (max-width: 1024px) and (min-width: 768px) {
+    .scrollerbottom{right: 45%;}
+    .footerbg h5{margin-top: 5%;}
+    .footerbg ul{line-height: 2.4;}
+    .footerbg{padding-bottom: 60px;}
+    .section4 h3, .section3 h3, .section2 h3{font-size: 12px;}
+    .section4 h2, .section3 h2, .section2 h2{font-size: 20px;}
+    .section4 h2 span, .section3 h2 span, .section2 h2 span{font-size: 22px;}
+    .mainbannerbg{background-size: cover; height: 400px;}
+    .bannerbg{margin-top: 0%;}
+    .bannerbg h2{font-size: 48px;}
+    .bannerbg h2 span{font-size: 66px;}
+    .bannerbg p{font-size: 16px; width: 100%;}
+    .section1{margin-top: 10%;}
+    .headcall{ border-left: none; margin-top: 4px;}
+    .afterloginnewheader{position: relative;}
+    #nav{margin: 0px !important;}
+    #nav ul { position:fixed !important; width:70% !important; left:0px; margin:-1px 0px 0px 0px !important; padding:20px; background-color:#0C3C54 !important; height:100%;}
+    .loginmenu{margin: 20px 0px !important;}
+    .loginmenu a iconify-icon, .signupmenu a iconify-icon{float: right; left: 0px;}
+    #menutoggle{margin-top: 1%;}
+    .aftrlogincontainer1 { margin-top: 1%;}
+    #innav{margin: 0px !important;}
+    #innav ul { position:fixed !important; width:70% !important; left:0px; margin:-1px 0px 0px 0px !important; padding:20px; background-color:#0C3C54 !important; height:100%;}
+    .form-group1 iconify-icon{right: 11%;}
+    .mycontainer{width: 100% !important;}
+    .section5{background-size: cover;}
+    .section3{height: 320px;}
+    .sec1box1{font-size: 14px;}
+    .sec1box1 span{font-size: 30px;}
+    .sec1box1 iconify-icon{font-size: 35px; top: 6px;}
+    .bannerbg{margin-top: 0%;}
+    .bannerbg h3{font-size: 13px; margin-top: 25% !important;}
+    .bannerbg h2{font-size: 40px;}
+    .bannerbg h2 span{font-size: 40px;}
+    .bannerbg p{font-size: 14px; width: 100%;}
+    .bannerbg ul li{font-size: 13px;}
+    .loginwhitebg{width: 100%; margin-left: 0%;}
+    .afterlogcon3box1{height: auto;}
+}
+
+@media all and (max-width: 1400px) and (min-width: 1026px) {
+   
+} 
+
+@media all and (max-width: 1600px) and (min-width: 1401px) {
+    
+}
+
+@media all and (max-width: 1750px) and (min-width: 1601px) {
+  
+}

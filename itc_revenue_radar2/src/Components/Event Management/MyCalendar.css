@@ -1,0 +1,7 @@
+/* MyCalendar.css */
+
+/* Hide the toolbar in the agenda view */
+.custom-calendar .rbc-agenda-toolbar {
+    display: none;
+  }
+  

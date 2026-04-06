@@ -1,0 +1,79 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #e48989; /* Light gray background */
+  color: #2C3E50;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+}
+
+
+.dot-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot-loader div {
+  width: 15px;
+  height: 15px;
+  background-color: #107710; /* Bootstrap green or change as needed */
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+}
+
+.dot-loader div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot-loader div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  to {
+    transform: translateY(-10px);
+    opacity: 0.5;
+  }
+}
+
+
+.nav3LinkBtn:hover{
+  color: #007bff;
+}
+
+.scrollable-table-container {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+}
+
+.scrollable-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #6c757d; /* same as .bg-secondary */
+  color: white;
+  z-index: 2;
+}
+
+/* Optional: Horizontal scroll if content overflows */
+@media (max-width: 768px) {
+  .scrollable-table-container {
+    overflow-x: auto;
+  }
+
+  .scrollable-table {
+    min-width: 600px;
+  }
+}

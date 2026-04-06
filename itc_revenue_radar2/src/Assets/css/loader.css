@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+
+.loadertitle{color: #0C3C54; font-size: 20px !important; font-family: "Exo"; font-weight: 500 !important; margin-top: 2%;}
+
+.loader {
+    display: ruby-text;
+    column-gap: 25px;
+    width: 100%;
+    text-align: center;
+    margin: 2% auto 0px auto;
+    font-family: "Exo", sans-serif;
+    margin-top:25px;
+  }
+  
+  .loader .dot {
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border-radius: 50%;
+    animation: loading 1s infinite alternate;
+  }
+  
+  .loader .dot:nth-child(1) {
+    background-color: #0C3C54;
+    animation-delay: -0.25s;
+  }
+  
+  .loader .dot:nth-child(2) {
+    background-color: #AC1424;
+    animation-delay: -0.5s;
+  }
+  
+  .loader .dot:nth-child(3) {
+    background-color: #FFDD00;
+    animation-delay: -0.75s;
+  }
+  
+  .loader .dot:nth-child(4) {
+    background-color: #AC1424;
+    animation-delay: -1s;
+  }
+
+  .loader .dot:nth-child(5) {
+    background-color: #0C3C54;
+    animation-delay: -1s;
+  }
+  
+  @keyframes loading {
+    0% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(5px);
+    }
+  }
+  

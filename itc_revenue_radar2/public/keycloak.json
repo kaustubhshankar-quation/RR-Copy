@@ -1,0 +1,8 @@
+{
+  "realm": "RR_MMX_DEMO",
+  "auth-server-url": "https://devauth.quation.co.in/",
+  "ssl-required": "external",
+  "resource": "MMX_UI_BYPASS",
+  "public-client": true,
+  "confidential-port": 0
+}

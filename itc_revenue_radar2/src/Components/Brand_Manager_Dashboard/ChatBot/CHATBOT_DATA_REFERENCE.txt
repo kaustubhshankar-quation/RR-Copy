@@ -1,0 +1,224 @@
+========================================================
+  CHATBOT DATA REFERENCE DOCUMENT
+  Revenue Radar — Keyword, Data & Answer Reference
+========================================================
+
+
+1. BRAND & MARKET MAPPING
+--------------------------------------------------------
+
+  Original Name             →  Chatbot Name
+  ─────────────────────────────────────────
+  Yippee Noodles            →  OODLES
+  Sunfeast Dark Fantasy     →  CHERY BRIGHT
+  Classmate                 →  BAD BANGLES
+  (no source data)          →  MILD URGENCY
+
+  Original Market           →  Chatbot Market
+  ─────────────────────────────────────────
+  Delhi NCR                 →  NORTH
+  Mumbai                    →  WEST
+  APTG                      →  EAST
+  (no source data)          →  SOUTH
+
+
+2. BRAND PERFORMANCE DATA (FY25)
+--------------------------------------------------------
+
+  Brand           Market   Sales(MT)   Revenue(₹L)  Growth   Share
+  ─────────────────────────────────────────────────────────────────
+  OODLES          NORTH    1,401.8     10,406.7      +20.2%   36.0%
+  OODLES          EAST     1,115.5      8,280.2      +13.9%   29.7%
+  OODLES          WEST       894.1      6,635.4      +10.4%   23.4%
+  OODLES          SOUTH    (no data — invented: 21.8% share)
+
+  CHERY BRIGHT    NORTH    1,288.4     15,460.8      +18.5%   32.8%
+  CHERY BRIGHT    EAST       803.5      9,639.6      +11.7%   20.7%
+  CHERY BRIGHT    WEST     1,098.7     13,184.4      +16.2%   28.2%
+  CHERY BRIGHT    SOUTH    (no data — invented: 19.5% share)
+
+  BAD BANGLES     NORTH      892.9      8,036.1      +13.8%   22.1%
+  BAD BANGLES     EAST       664.2      5,977.8      +10.5%   16.6%
+  BAD BANGLES     WEST       546.2      4,915.8       +8.0%   13.6%
+  BAD BANGLES     SOUTH    (no data — invented: 11.9% share)
+
+  MILD URGENCY    NORTH    1,320.5     11,884.5      +19.1%   33.5%
+  MILD URGENCY    EAST       980.0      8,820.0      +14.5%   27.1%
+  MILD URGENCY    WEST       850.0      7,650.0      +12.0%   25.0%
+  MILD URGENCY    SOUTH      720.0      6,480.0      +10.0%   22.6%
+  (MILD URGENCY — all numbers invented, no source data)
+
+
+3. MEDIA MIX DATA (Spend, ROI, Contribution, GRPs)
+--------------------------------------------------------
+
+  OODLES — NORTH:
+    TV              ₹520L    3.1x ROI    34.2% contrib    2,100 GRPs
+    Digital         ₹240L    3.8x ROI    22.1% contrib
+    Consumer Promo  ₹280L    2.1x ROI    15.8% contrib
+    Trade Promo     ₹410L    1.6x ROI    17.8% contrib
+    OOH              ₹95L    1.3x ROI     3.9% contrib
+
+  OODLES — EAST:
+    TV              ₹450L    2.8x ROI    32.5% contrib    1,850 GRPs
+    Digital         ₹180L    3.2x ROI    18.8% contrib
+    Consumer Promo  ₹220L    1.9x ROI    13.6% contrib
+    Trade Promo     ₹350L    1.4x ROI    15.9% contrib
+    OOH              ₹80L    1.2x ROI     3.1% contrib
+
+  OODLES — WEST:
+    TV              ₹380L    2.5x ROI    29.8% contrib    1,620 GRPs
+    Digital         ₹210L    3.5x ROI    21.2% contrib
+    Consumer Promo  ₹195L    1.8x ROI    12.7% contrib
+    Trade Promo     ₹320L    1.3x ROI    14.2% contrib
+    OOH             ₹110L    1.5x ROI     5.6% contrib
+
+  CHERY BRIGHT — NORTH:
+    TV              ₹680L    3.6x ROI    38.9% contrib    2,650 GRPs
+    Digital         ₹420L    4.8x ROI    28.4% contrib
+    Consumer Promo  ₹195L    2.4x ROI    12.8% contrib
+    Trade Promo     ₹250L    1.7x ROI    11.8% contrib
+    OOH              ₹85L    1.3x ROI     3.1% contrib
+
+  CHERY BRIGHT — EAST:
+    TV              ₹520L    3.1x ROI    35.8% contrib    2,100 GRPs
+    Digital         ₹310L    4.2x ROI    24.3% contrib
+    Consumer Promo  ₹180L    2.3x ROI    12.5% contrib
+    Trade Promo     ₹240L    1.6x ROI    12.8% contrib
+    OOH              ₹65L    1.1x ROI     2.4% contrib
+
+  CHERY BRIGHT — WEST:
+    TV              ₹610L    3.4x ROI    37.2% contrib    2,400 GRPs
+    Digital         ₹380L    4.5x ROI    26.8% contrib
+    Consumer Promo  ₹220L    2.1x ROI    13.1% contrib
+    Trade Promo     ₹270L    1.5x ROI    11.9% contrib
+    OOH              ₹75L    1.2x ROI     2.8% contrib
+
+  BAD BANGLES — NORTH:
+    TV              ₹320L    2.3x ROI    30.1% contrib    1,380 GRPs
+    Digital         ₹195L    3.3x ROI    21.8% contrib
+    Consumer Promo  ₹210L    1.9x ROI    15.2% contrib
+    Trade Promo     ₹330L    1.3x ROI    17.1% contrib
+    OOH              ₹80L    1.1x ROI     3.2% contrib
+
+  BAD BANGLES — EAST:
+    TV              ₹280L    2.1x ROI    28.4% contrib    1,200 GRPs
+    Digital         ₹150L    2.8x ROI    18.9% contrib
+    Consumer Promo  ₹190L    1.7x ROI    14.5% contrib
+    Trade Promo     ₹310L    1.2x ROI    16.8% contrib
+    OOH              ₹55L    0.9x ROI     2.2% contrib
+
+  BAD BANGLES — WEST:
+    TV              ₹240L    1.9x ROI    25.8% contrib    1,050 GRPs
+    Digital         ₹175L    3.1x ROI    20.4% contrib
+    Consumer Promo  ₹160L    1.6x ROI    12.8% contrib
+    Trade Promo     ₹285L    1.1x ROI    14.5% contrib
+    OOH              ₹70L    1.0x ROI     2.9% contrib
+
+
+4. MODEL PERFORMANCE (MMM Accuracy)
+--------------------------------------------------------
+
+  Brand           Market   MAPE     R²     Accuracy   Data Period
+  ──────────────────────────────────────────────────────────────
+  CHERY BRIGHT    WEST     6.9%    0.97    93.1%      Apr 2022–Dec 2024
+  CHERY BRIGHT    NORTH    7.2%    0.96    92.8%      Apr 2022–Dec 2024
+  CHERY BRIGHT    EAST     7.5%    0.96    92.5%      Apr 2022–Dec 2024
+  OODLES          NORTH    7.8%    0.95    92.2%      Apr 2022–Dec 2024
+  OODLES          EAST     8.2%    0.94    91.8%      Apr 2022–Dec 2024
+  MILD URGENCY    (all)    8.1–9.0%  0.93–0.95  91.0–91.9%  (invented)
+  OODLES          WEST     9.4%    0.92    90.6%      Apr 2022–Dec 2024
+  BAD BANGLES     NORTH   10.8%    0.90    89.2%      Apr 2022–Dec 2024
+  BAD BANGLES     EAST    11.3%    0.89    88.7%      Apr 2022–Dec 2024
+  BAD BANGLES     WEST    12.1%    0.87    87.9%      Apr 2022–Dec 2024
+
+  All models: 144 weekly observations
+
+
+5. OPTIMIZATION / SCENARIO DATA (Same Budget, Reallocated)
+--------------------------------------------------------
+
+  Brand              Market   Base Sales   Optimized   Uplift    Budget
+  ─────────────────────────────────────────────────────────────────────
+  CHERY BRIGHT       NORTH    1,288 MT     1,417 MT    +10.0%   ₹1,630L
+  CHERY BRIGHT       WEST     1,098 MT     1,207 MT     +9.9%   ₹1,555L
+  CHERY BRIGHT       EAST       803 MT       876 MT     +9.1%   ₹1,315L
+  OODLES             NORTH    1,401 MT     1,527 MT     +8.9%   ₹1,545L
+  BAD BANGLES        NORTH      892 MT       963 MT     +7.9%   ₹1,135L
+  OODLES             WEST       894 MT       962 MT     +7.7%   ₹1,215L
+  OODLES             EAST     1,115 MT     1,198 MT     +7.4%   ₹1,280L
+  BAD BANGLES        WEST       546 MT       585 MT     +7.2%   ₹930L
+  BAD BANGLES        EAST       664 MT       711 MT     +7.1%   ₹985L
+
+  Reallocation pattern:
+    Digital       ↑ 22–30%
+    TV            ↑ 10–15%
+    Consumer Promo ↓ 8–10%
+    Trade Promo   ↓ 10–40%
+    OOH           ↓ 32–88%
+
+
+6. ROI SUMMARY BY CHANNEL (Across All Brands)
+--------------------------------------------------------
+
+  Channel          ROI Range      Contribution Range
+  ─────────────────────────────────────────────────
+  Digital          2.8x – 4.8x   18% – 28%
+  TV               1.9x – 3.6x   25% – 39%
+  Consumer Promo   1.6x – 2.4x   12% – 16%
+  Trade Promo      1.1x – 1.7x   11% – 18%
+  OOH              0.9x – 1.5x    2% –  6%
+
+  Spend ranges:
+    TV              ₹240 – 680 Lakhs
+    Digital         ₹150 – 420 Lakhs
+    Trade Promo     ₹240 – 410 Lakhs
+    Consumer Promo  ₹160 – 280 Lakhs
+    OOH              ₹55 – 110 Lakhs
+
+
+7. KEYWORD → ANSWER MAPPING (19 Total)
+--------------------------------------------------------
+
+  #   Keywords                                          Answer Topic
+  ─────────────────────────────────────────────────────────────────────
+  1   brand + (available | list | which | what)          Brands & markets list
+  2   market share                                       Market share by brand & region
+  3   roi | best channel | best media                    Best ROI channels ranked
+  4   sales | revenue | performance                      FY25 sales highlights
+  5   spend | media mix | channel spend                  Media spend allocation
+  6   mape | r2 | r² | model | accuracy                 Model accuracy metrics
+  7   optim | budget | allocat | uplift                  Optimization impact
+  8   simulat | scenario | what if                       Simulation guide
+  9   region | east | west | north | south |             Market-wise performance
+      market | geography
+  10  quarter | qtr | q1 | q2 | q3 | q4                 Quarterly trends
+  11  tv | grp | television                              TV performance & GRPs
+  12  digital | online                                   Digital channel performance
+  13  ooh | out of home | outdoor                        OOH performance
+  14  trade promo | trade promotion                      Trade Promo performance
+  15  consumer promo                                     Consumer Promo performance
+  16  contribution | driver                              Sales contribution by channel
+  17  hello | hi (space) | hey | hi (exact)              Greeting message
+  18  thank                                              Thank you reply
+  19  (no match)                                         Fallback — lists all topics
+
+  Priority: First match wins (checked top to bottom).
+  All matching is case-insensitive (input.toLowerCase()).
+
+
+8. NOTES
+--------------------------------------------------------
+
+  - All data is HARDCODED in generateBotReply() inside ChatBot.jsx
+  - Numbers come from the Python dummy data module (shared by user)
+  - MILD URGENCY brand and SOUTH market have NO source data
+    (all their numbers were invented)
+  - Nothing is fetched from any API or database
+  - Numbers never change — they are static text strings
+  - To use real data, connect to backend API or replace strings
+
+
+========================================================
+  END OF DOCUMENT
+========================================================
