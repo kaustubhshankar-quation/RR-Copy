@@ -1,0 +1,958 @@
+html,
+body {
+  font-size: 17px;
+  background: rgb(228, 227, 227) !important;
+}
+
+.mainHomepg {
+  background: white;
+}
+
+.uniform-table {
+  table-layout: fixed;   /* ensures equal width distribution */
+  width: 100%;           /* makes table take full container width */
+}
+
+.uniform-table th,
+.uniform-table td {
+  width: 25%;            /* 4 columns → 100%/4 = 25% each */
+  text-align: center;    /* keep everything centered */
+  word-wrap: break-word; /* prevent overflow issues */
+}
+
+/* FOOTER CSS */
+/* Start */
+.footer-modern{
+background: linear-gradient(135deg,#f8fafc,#eef2ff);
+border-top:1px solid #e5e7eb;
+padding:25px 0;
+font-family: "Inter", sans-serif;
+}
+
+/* SOCIAL ICONS */
+
+.social-btn{
+width:38px;
+height:38px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:white;
+color:#023803;
+font-size:14px;
+transition:all 0.25s ease;
+box-shadow:0 2px 6px rgba(0,0,0,0.08);
+text-decoration:none;
+}
+
+/* Hover Animation */
+
+.social-btn:hover{
+transform:translateY(-4px);
+background:#023803;
+color:white;
+box-shadow:0 6px 14px rgba(37,99,235,0.3);
+}
+
+/* Scroll Top */
+
+.scroll-top{
+background:#111827;
+color:white;
+}
+
+.scroll-top:hover{
+background:#878006;
+}
+/* END */
+
+/* =========================
+   MAIN DASHBOARD CONTAINER
+========================= */
+
+.dashboard-container{
+display:flex;
+min-height:100vh;
+background:#f6f8fb;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+width:260px;
+background:#023803;
+color:white;
+transition:0.3s;
+display:flex;
+flex-direction:column;
+flex-shrink:0;
+}
+
+.sidebar.collapsed{
+width:80px;
+}
+
+
+/* =========================
+   SIDEBAR HEADER
+========================= */
+
+.sidebar-header{
+padding:20px;
+cursor:pointer;
+}
+
+.toggle-btn{
+font-size:22px;
+}
+
+
+/* =========================
+   USER SECTION
+========================= */
+
+.user-section{
+display:flex;
+align-items:center;
+gap:10px;
+padding:20px;
+border-bottom:1px solid #2d3748;
+}
+
+.user-icon{
+font-size:28px;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu{
+list-style:none;
+padding:0;
+margin-top:20px;
+flex-grow:1;
+}
+
+.menu li{
+margin-bottom:5px;
+}
+
+.menu-link{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 20px;
+color:#cbd5e1;
+text-decoration:none;
+transition:0.2s;
+}
+
+.menu-link:hover{
+background:#504c02;
+color:white;
+}
+
+.menu-link.active{
+background:#878006;
+color:white;
+border-left:4px solid white;
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-section{
+padding:15px;
+border-top:1px solid #2d3748;
+}
+
+.logout-btn{
+width:100%;
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 15px;
+background:#ef4444;
+border:none;
+color:white;
+border-radius:8px;
+font-size:14px;
+transition:all 0.2s ease;
+}
+
+.logout-btn:hover{
+background:#dc2626;
+transform:translateY(-2px);
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.main-container{
+flex-grow:1;
+display:flex;
+flex-direction:column;
+min-height:100vh;
+background:#f6f8fb;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+height:60px;
+flex-shrink:0;
+display:flex;
+align-items:center;
+background:white;
+border-bottom:1px solid #e5e7eb;
+}
+
+
+/* =========================
+   CONTENT AREA
+========================= */
+
+.content-area{
+flex-grow:1;
+overflow-y:auto;
+scroll-behavior:smooth;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+padding:10px;
+background:white;
+border-top:1px solid #e5e7eb;
+flex-shrink:0;
+}
+
+
+/* =========================
+   HIDE SCROLLBAR BUT KEEP SCROLL
+========================= */
+
+.content-area::-webkit-scrollbar{
+width:0px;
+height:0px;
+}
+
+.content-area{
+-ms-overflow-style:none;
+scrollbar-width:none;
+}
+
+
+/* Add to your CSS file or styled component */
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.news-ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background: linear-gradient(to right, #e0f7fa, #ffffff);
+  padding: 8px 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+
+.news-ticker span {
+  display: inline-block;
+  padding-right: 50px;
+  animation: scroll-left 25s linear infinite;
+}
+.news-ticker a {
+  text-decoration: none;
+  color: #090909;
+}
+.news-ticker a:hover {
+  text-decoration: underline;
+}
+.kpi-card {
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.bg-gradient-primary { background: linear-gradient(135deg, #0072ff, #00c6ff); }
+.bg-gradient-success { background: linear-gradient(135deg, #28a745, #7be495); }
+.bg-gradient-danger { background: linear-gradient(135deg, #dc3545, #ff7a7a); }
+
+
+/* Custom Dropdown Styling */
+.custom-dropdown {
+  position: relative;
+  border-radius: 12px;
+  padding: 6px 6;
+  animation: fadeInUp 0.25s ease-in-out;
+  background: #fff;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Top Arrow with Color */
+.custom-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #007bff;
+  /* arrow color */
+  filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Buttons inside dropdown */
+.custom-dropdown .brand-option {
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.custom-dropdown .brand-option:hover {
+  background: linear-gradient(135deg, #0c223a, #0056b3);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Animation for dropdown entry */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.selectboxwidth {
+  min-width: 350px;
+}
+
+.bgpages {
+  background: rgb(228, 227, 227) !important;
+  color: black;
+  height: fit-content;
+  padding: 0px 20px;
+}
+
+.breadcrumb {
+  background: rgba(64, 64, 64, 0.1) !important;
+  /* subtle dark gray overlay */
+  color: #0c0c0c;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-left: 4px solid #063970;
+  backdrop-filter: blur(4px);
+
+}
+
+.pageheading {
+
+  /* background: radial-gradient(at top left, rgba(55,196,33,0.9), transparent),
+            radial-gradient(at bottom right, rgba(1,46,5,0.9), transparent) !important; */
+  background: rgb(19, 62, 12) !important;
+  color: white;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-left: 4px solid #063970;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+.inputs {
+  word-wrap: break-word;
+  /* Allows breaking long words */
+  overflow-wrap: break-word;
+  white-space: normal;
+  /* Prevents text from staying in one line */
+  max-width: 100%;
+  /* Ensures it stays within container */
+}
+
+.variable-text {
+  flex: 1;
+  /* Allows the text to take available space */
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.orangetheme {
+  background-color: #F79548;
+  color: white;
+
+}
+
+.apexcharts {
+  font-size: inherit !important;
+}
+
+/* Set specific font sizes for labels */
+
+.apexcharts-yaxis-label {
+  font-size: 10px !important;
+}
+
+/* Table font size */
+.table td,
+.table th {
+  font-size: 13px !important;
+  /* Table cells */
+}
+
+.plotbrandanalysis {
+  width: 90vw !important;
+  height: 600px;
+
+  /* overflow-x: scroll; */
+}
+
+.btn-orange {
+  background-color: #FFA500 !important;
+  /* Pure orange */
+  color: black !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  font-weight: 500 !important;
+  transition: background-color 0.3s ease, transform 0.1s ease !important;
+}
+
+.btn-orange:hover {
+  background-color: #e59400 !important;
+  /* Slightly darker orange */
+  transform: translateY(-1px) !important;
+}
+
+.btn-orange:active {
+  background-color: #cc8400 !important;
+  /* Even darker for click */
+  transform: translateY(1px) !important;
+}
+
+.btngreen {
+  background-color: #063970;
+  /* Dark green background */
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+
+  box-shadow: 0px 4px 8px grey;
+
+  position: relative;
+}
+
+.sidearrow {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  color: #063970;
+  /* Matches button background */
+  border-radius: 50%;
+  margin-left: 10px;
+  position: absolute;
+  right: -10px;
+}
+
+.lightgreentheme {
+  color: #063970;
+}
+
+.greentheme {
+  color: #063970;
+}
+
+.btnlightgreen {
+  color: white;
+  background-color: #063970;
+  font-size: 15px;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btnsubnavbar {
+  color: white;
+  border: none;
+  background-color: #063970;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.btnsubnavbarselected {
+  color: white;
+  border: none;
+  background-color: #063970;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.btngreentheme {
+  color: white !important;
+  border: none !important;
+  background: linear-gradient(135deg, #11390c, #00b30f) !important;
+  font-size: 14px !important;
+  border-radius: 5px !important;
+}
+
+.subNavbar2Navlink {
+  color: #063970 !important;
+  font-size: 18px;
+  /* base size */
+  font-weight: 600;
+  transition: all 0.5s ease-in-out;
+  /* smooth transition */
+}
+
+.subNavbar2Navlink:hover {
+  transform: scale(1.15);
+  /* smooth zoom instead of font-size jump */
+  text-decoration: underline !important;
+  color: #015d52 !important;
+  /* optional: add a nice hover color */
+}
+
+
+.btndanger {
+  color: white;
+  border: none;
+  background-color: #dc3545;
+  font-size: 13px;
+  border-radius: 5px;
+}
+
+.bgpages {
+  /* background:url("../public/Assets/Images/bgpages.png") no-repeat center center; */
+  background-color: #f2f2f2;
+  background-size: cover;
+  min-height: 67vh;
+}
+
+.btnshaded {
+  border: 2px solid white;
+  background-image: linear-gradient(to right, #063970, #063970);
+  /* Dark green gradient */
+  color: white;
+
+  border-radius: 5px;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Shadow around the button */
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btnshaded:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  /* Slight shadow increase on hover */
+}
+
+.btnshaded .sidearrowshaded {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  right: -15px;
+  /* Adjust position for the circle arrow */
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  /* Circle shadow */
+}
+
+.btnshaded .sidearrowshaded:before {
+  content: "›";
+  /* Right arrow symbol */
+  color: #063970;
+  /* Dark green color for the arrow */
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  line-height: 25px;
+  /* Vertically center the arrow inside the circle */
+}
+
+.btnyellow {
+  border: 2px solid white;
+  background-image: linear-gradient(to right, #ffa804, #ffa804);
+  /* Dark green gradient */
+  color: white;
+
+  border-radius: 5px;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Shadow around the button */
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btnyellow:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  /* Slight shadow increase on hover */
+}
+
+.btnyellow .sidearrowyellow {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  right: -15px;
+  /* Adjust position for the circle arrow */
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  /* Circle shadow */
+}
+
+.btnyellow .sidearrowyellow:before {
+  content: "›";
+  /* Right arrow symbol */
+  color: #ffa804;
+  /* Dark green color for the arrow */
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  line-height: 25px;
+  /* Vertically center the arrow inside the circle */
+}
+
+/* General styling for carousel indicators */
+.carousel-indicatorscustom {
+  display: flex;
+  /* Aligns indicators horizontally */
+  justify-content: center;
+  /* Centers them horizontally */
+  position: absolute;
+  /* Ensures the indicators stay on the carousel */
+  bottom: 0px;
+  /* Adjust this value to position the indicators vertically */
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
+.carousel-indicatorscustom span {
+  width: 15px;
+  /* Adjust width */
+  height: 15px;
+  /* Adjust height */
+  border-radius: 50%;
+  /* Make them round */
+  background-color: rgba(255, 255, 255, 0.5);
+  /* Initial color */
+  margin: 0 5px;
+  /* Adds space between the indicators */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  /* Light shadow */
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.carousel-indicatorscustom .active {
+  background-color: black;
+  /* Color for active indicator */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  /* Larger shadow for active indicator */
+}
+
+
+
+
+.bluetheme2 {
+  background-color: #426AB3;
+  color: white
+}
+
+.orangetheme2 {
+  background-color: #F79548;
+  color: white;
+
+}
+
+.orangetheme2:focus,
+.orangetheme2:active,
+.orangetheme2.collapsed:focus,
+.orangetheme2.collapsed:active {
+
+  box-shadow: 0 0 0 0.25rem #f0c29f !important;
+
+}
+
+.orangetheme2:not(.collapsed) {
+  background-color: #F79548;
+  /* Color when expanded */
+  color: white;
+  border-color: #F79548;
+}
+
+.orangetheme3 {
+  background-color: #F15E22;
+  color: white;
+
+}
+
+button:focus,
+button:active {
+  outline: none;
+  /* Remove default focus outline */
+  border: none;
+  /* Remove button border */
+}
+
+select:focus {
+  outline: none;
+}
+
+.noborder {
+  outline: none;
+  /* Remove default focus outline */
+  border: none;
+  /* Remove button border */
+}
+
+select {
+  border: none;
+}
+
+/* ApexCharts toolbar dropdown menu - dark mode fix */
+.dark-theme .apexcharts-menu {
+  background: #1e293b;
+  color: #e9e9e9;
+  border: 1px solid #334155;
+}
+.dark-theme .apexcharts-menu-item:hover {
+  background: #334155;
+}
+
+.navbar2 {
+  width: 150px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  background-color: white;
+}
+
+
+.pageback {
+  background-image: linear-gradient(white, rgb(235, 229, 240));
+  width: 99%;
+
+}
+
+
+.sidenavbar {
+  box-shadow: 6px 0 5px -2px #adabab;
+  background-color: #f2f2f2;
+  z-index: 2;
+  width: 245px;
+  position: relative;
+  min-height: 95vh;
+}
+
+.sidenavbar3 {
+  box-shadow: 6px 0 5px -2px #adabab;
+  background-color: #f2f2f2;
+  z-index: 2;
+  width: 320px;
+  position: relative;
+  min-height: 110vh;
+}
+
+.sidenavbar4 {
+  box-shadow: 6px 0 5px -2px #adabab;
+  background-color: #f2f2f2;
+  z-index: 2;
+  width: 320px;
+  position: relative;
+  min-height: 115vh;
+}
+
+#mainscreen {
+  height: 105vh;
+  overflow-y: scroll;
+  margin: 0;
+}
+
+
+#mainscreen::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+/* .modalhw {
+width:1000px;
+} */
+@media screen and (max-width: 600px) {
+  .sidenavbar {
+    height: 500px;
+    box-shadow: 3px 0 5px -2px #888;
+    background-image: linear-gradient(white, rgb(245, 228, 244));
+  }
+}
+
+nav {
+  box-shadow: 3px 0 10px -2px #888;
+}
+
+.parametermenu {
+  background-color: white;
+  min-height: 92vh;
+  font-size: 2vh;
+  box-shadow: 3px 0 5px -2px #888;
+  border-top: 0px;
+  padding: 30px;
+}
+
+.page {
+  background-color: rgba(245, 248, 251, 255);
+
+}
+
+.card {
+
+  box-shadow: 3px 5px 5px -2px #888;
+}
+
+.blurry-component {
+  filter: blur(5px);
+  /* Adjust the blur intensity as needed */
+}
+
+.sidenavbar2 {
+  box-shadow: 6px 0 5px -2px #adabab;
+  background-color: #f2f2f2;
+  z-index: 2;
+  width: 750px;
+  position: relative;
+  min-height: 95vh;
+}
+
+
+.campaignbox {
+  /* transition: opacity 0.3s ease-in-out; */
+
+  background-color: #f2f2f2;
+  width: 350px;
+  z-index: 10;
+
+}
+
+.hrdivider {
+
+
+
+  border: 1px solid #647f99;
+}
+
+.hrdivider2 {
+
+  margin-top: 0px;
+  border: 1px solid #647f99;
+}
+
+.hrdivider3 {
+
+  margin-top: 7px;
+  border: 1px solid #647f99;
+}
+
+.arrowexpand {
+  position: absolute;
+  top: -6px;
+  left: 251px;
+}
+
+.card-body {
+  padding: 6px !important;
+
+}
+
+.list-group-item {
+
+  padding: 3px !important;
+}
+
+.dashboard {
+  min-height: 65vh;
+  /* background:url("../public/Assets/Images/bgdashboard.jpg") no-repeat center center ; */
+  background-size: cover;
+  background-color: #f2f2f2;
+}
+
+
+.container-fluid,
+.navbar,
+.navbar-expand-sm {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.imagedashboard {
+  bottom: 50px;
+}
+
+.tablescrollbar {
+  height: 50vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
