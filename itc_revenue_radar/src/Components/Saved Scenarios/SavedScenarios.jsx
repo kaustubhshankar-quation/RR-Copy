@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 import ExceptionVariables from '../JSON Files/ExceptionVariables.json'
 import maskedBrandOption from '../JSON Files/MaskedBrandOption.json'
 import unMaskedBrandOption from '../JSON Files/MaskedBrandOption.json'
 import Loader from "react-js-loader";
 import { Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import Select, { components } from "react-select";
 import { useDispatch } from "react-redux";
 import UserService from "../../services/UserService"; import AuthService from "../../services/AuthService";
@@ -34,6 +36,8 @@ const { REACT_APP_UPLOAD_DATA } = process.env;
 const { REACT_APP_UPLOAD_DATA2 } = process.env;
 const XLSX = require("xlsx");
 function SavedScenarios() {
+  const { collapsed } = useOutletContext() || {};
+  const sidebarOffset = collapsed ? 88 : 290;
   const [referencescenarioname, setreferencescenarioname] = useState([])
   const [masterscenariotimestamp, setmasterscenariotimestamp] = useState("")
   const fileInputRef = useRef(null);
@@ -63,6 +67,7 @@ function SavedScenarios() {
   const [loader3, setloader3] = useState(false);
   const [loader4, setloader4] = useState(false);
   const [loader5, setloader5] = useState(false);
+  const [deletingScenarioKey, setDeletingScenarioKey] = useState("");
   const [scenariooptions, setscenariooptions] = useState([]);
   const [scenarionewoldscreen, setscenarionewoldscreen] = useState("Select")
   const [viewscenariobtn, setviewscenariobtn] = useState(false)
@@ -1431,8 +1436,10 @@ function SavedScenarios() {
     setloader5(false)
   };
   const handledeletescenarios = async (row) => {
+    const scenarioKey = `${row?.scenario_name}-${row?.created_dt}`;
     if (UserService.isLoggedIn()) {
       try {
+        setDeletingScenarioKey(scenarioKey);
         setloader5(true)
         const FormData = require("form-data");
         const sendData = new FormData();
@@ -1554,6 +1561,7 @@ function SavedScenarios() {
       }, 1000);
     }
     setloader5(false)
+    setDeletingScenarioKey("");
   };
   const handleCheckboxChange = (index, row) => {
     // If the clicked checkbox is the same as the currently selected one, uncheck it
@@ -1958,7 +1966,8 @@ function SavedScenarios() {
                                       </td>
                                       <td>
                                         <div className="d-flex justify-content-center align-items-center gap-2 flex-wrap">
-                                          {loader5 ? (
+                                          {deletingScenarioKey ===
+                                            `${row?.scenario_name}-${row?.created_dt}` ? (
                                             <span className="ss-muted-text">
                                               Loading...
                                             </span>
@@ -2009,7 +2018,7 @@ function SavedScenarios() {
                                             ""
                                           ) : (
                                             <button
-                                              className="ss-icon-btn"
+                                              className="ss-icon-btn ss-delete-btn"
                                               onClick={() => {
                                                 handledeletescenarios(row);
                                               }}
@@ -2027,12 +2036,52 @@ function SavedScenarios() {
                                       </td>
                                     </tr>
 
-                                    {openindex[index] === true && (
-                                      <tr>
-                                        <td colSpan="10" className="p-3">
+                                    {openindex[index] === true && ReactDOM.createPortal(
+                                      <>
+                                        <div
+                                          className="modal show"
+                                          style={{
+                                            display: "block",
+                                            position: "fixed",
+                                            top: 0,
+                                            left: sidebarOffset,
+                                            width: `calc(100vw - ${sidebarOffset}px)`,
+                                            height: "100vh",
+                                            zIndex: 9999,
+                                            overflowX: "hidden",
+                                            overflowY: "auto",
+                                            background: "transparent",
+                                          }}
+                                          tabIndex="-1"
+                                        >
+                                          <div
+                                            className="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"
+                                            style={{ maxWidth: "90vw", marginLeft: "auto", marginRight: "auto" }}
+                                          >
+                                            <div className="modal-content border-0 shadow" style={{ background: "var(--rr-bg-panel)" }}>
+                                              <div
+                                                className="modal-header"
+                                                style={{
+                                                  background: "var(--rr-bg-soft)",
+                                                  borderBottom: "1px solid var(--rr-border)",
+                                                  padding: "12px 20px",
+                                                }}
+                                              >
+                                                <h5 className="modal-title fw-semibold" style={{ color: "var(--rr-text-main)", fontSize: "15px" }}>
+                                                  {row?.scenario_name}
+                                                </h5>
+                                                <button
+                                                  type="button"
+                                                  className="btn-close"
+                                                  style={{ filter: "var(--rr-close-filter, none)" }}
+                                                  onClick={() => setopenindex([])}
+                                                />
+                                              </div>
+                                              <div className="modal-body" style={{ padding: "20px" }}>
                                           {loader2 ? (
                                             <div className="ss-inline-loader">
-                                              Loading...
+                                              <div className="dot-flashing"></div>
+                                              <p className="ss-loader-text">Fetching Details...</p>
                                             </div>
                                           ) : fulldataset?.plot1.length > 0 ? (
                                             <div className="ss-detail-wrap">
@@ -2846,9 +2895,24 @@ function SavedScenarios() {
                                               There was some problem generating charts!
                                             </div>
                                           )}
-                                        </td>
-                                      </tr>
-                                    )}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          className="modal-backdrop show"
+                                          style={{
+                                            zIndex: 9998,
+                                            position: "fixed",
+                                            top: 0,
+                                            left: sidebarOffset,
+                                            width: `calc(100vw - ${sidebarOffset}px)`,
+                                            height: "100vh",
+                                          }}
+                                          onClick={() => setopenindex([])}
+                                        />
+                                      </>
+                                    , document.body)}
                                   </React.Fragment>
                                 ))
                               ) : (
@@ -3559,6 +3623,19 @@ function SavedScenarios() {
         transition: all 0.25s ease;
       }
 
+      .ss-delete-btn {
+        color: #DC3545;
+        border-color: rgba(220, 53, 69, 0.35);
+        background: rgba(220, 53, 69, 0.08);
+      }
+
+      .ss-delete-btn:hover {
+        color: #FFFFFF;
+        background: linear-gradient(135deg, #DC3545 0%, #B02A37 100%);
+        border-color: rgba(220, 53, 69, 0.7);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.25);
+      }
+
       .ss-divider {
         color: var(--rr-text-muted);
         font-size: 20px;
@@ -3614,10 +3691,62 @@ function SavedScenarios() {
       }
 
       .ss-inline-loader {
-        padding: 24px;
-        text-align: center;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .dot-flashing {
+        position: relative;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: transparent;
+        border: 4px solid rgba(13, 124, 102, 0.12);
+        border-top-color: #0D7C66;
+        border-right-color: #17A2B8;
+        animation: spinnerRotate 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        box-shadow: 0 0 20px rgba(13, 124, 102, 0.15);
+      }
+
+      .dot-flashing::before,
+      .dot-flashing::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .dot-flashing::before {
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        border: 3px solid transparent;
+        border-top-color: #17A2B8;
+        border-left-color: #0D7C66;
+        animation: spinnerRotate 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
+      }
+
+      .dot-flashing::after {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        border: 2px solid transparent;
+        border-bottom-color: #0D7C66;
+        animation: spinnerRotate 0.7s linear infinite;
+      }
+
+      .ss-loader-text {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
         color: var(--rr-text-muted);
-        font-weight: 700;
+        letter-spacing: 0.4px;
+        animation: pulseText 1.8s ease-in-out infinite;
       }
 
       .ss-detail-wrap {
@@ -3681,6 +3810,24 @@ function SavedScenarios() {
         }
         40% {
           transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes spinnerRotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes pulseText {
+        0%, 100% {
+          opacity: 0.65;
+        }
+        50% {
           opacity: 1;
         }
       }
@@ -3802,6 +3949,18 @@ function SavedScenarios() {
       [data-rr-theme="dark"] .ss-icon-btn:hover {
         color: #17A2B8;
         border-color: rgba(23, 162, 184, 0.3);
+      }
+
+      [data-rr-theme="dark"] .ss-delete-btn {
+        color: #FF7B88;
+        border-color: rgba(255, 123, 136, 0.4);
+        background: rgba(220, 53, 69, 0.16);
+      }
+
+      [data-rr-theme="dark"] .ss-delete-btn:hover {
+        color: #FFFFFF;
+        background: linear-gradient(135deg, #FF5F6D 0%, #C44552 100%);
+        border-color: rgba(255, 95, 109, 0.75);
       }
     `}</style>
     </>

@@ -36,6 +36,7 @@ import { toast } from "react-toastify";
 const { REACT_APP_REDIRECT_URI } = process.env;
 const { REACT_APP_UPLOAD_DATA } = process.env;
 const { REACT_APP_UPLOAD_DATA2 } = process.env;
+const SCENARIO_PREFILL_KEY = "revenue_chat_scenario_prefill";
 const XLSX = require("xlsx");
 function Simulator() {
   const [savedmasterscenarioname, setsavedmasterscenarioname] = useState("")
@@ -108,6 +109,7 @@ function Simulator() {
   const [tablepredictionsdataset, settablepredictionsdataset] = useState([]);
   const [tablecontributiondataset, settablecontributiondataset] = useState([]);
   const sectionRef = useRef(null);
+  const [chatbotPrefill, setChatbotPrefill] = useState(null);
 
   const [scenarioNameErrorFlag, setScenarioNameError] = useState(false)
 
@@ -121,6 +123,38 @@ function Simulator() {
   useEffect(() => {
     handlescenariosfetch()
   }, [market])
+
+  useEffect(() => {
+    try {
+      const rawPrefill = localStorage.getItem(SCENARIO_PREFILL_KEY);
+      if (!rawPrefill) return;
+      const parsedPrefill = JSON.parse(rawPrefill);
+      if (!parsedPrefill || typeof parsedPrefill !== "object") return;
+      setChatbotPrefill(parsedPrefill);
+      setscenarionewoldscreen("old");
+      if (parsedPrefill.fy) setselectedyear(parsedPrefill.fy);
+      if (parsedPrefill.brand) setselectedbrand(parsedPrefill.brand);
+      if (parsedPrefill.market) setmarket(parsedPrefill.market);
+      if (parsedPrefill.scenario_name) setselectedscenarioname(parsedPrefill.scenario_name);
+      if (parsedPrefill.scenario_timestamp) setselectedscenarionametimestamp(parsedPrefill.scenario_timestamp);
+      setdisplaynames2((prev) => ({
+        ...prev,
+        ...(parsedPrefill.brand ? { brand: parsedPrefill.brand } : {}),
+        ...(parsedPrefill.market ? { market: parsedPrefill.market } : {}),
+        ...(parsedPrefill.fy ? { fy: parsedPrefill.fy } : {}),
+        ...(parsedPrefill.scenario_name ? { scenario: parsedPrefill.scenario_name } : {}),
+      }));
+      localStorage.removeItem(SCENARIO_PREFILL_KEY);
+    } catch {
+      localStorage.removeItem(SCENARIO_PREFILL_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!chatbotPrefill?.scenario_name || !Array.isArray(scenariooptions) || scenariooptions.length === 0) return;
+    const matchedScenario = scenariooptions.find((option) => option?.value === chatbotPrefill.scenario_name);
+    if (matchedScenario?.timestamp) setselectedscenarionametimestamp(matchedScenario.timestamp);
+  }, [chatbotPrefill, scenariooptions]);
 
   const today1 = new Date();
   const currentYear = today1.getFullYear();
@@ -2419,6 +2453,31 @@ function Simulator() {
 
 
   };
+
+  useEffect(() => {
+    if (
+      !selectedscenarioname ||
+      selectedscenarioname === "Select" ||
+      !selectedscenarionametimestamp ||
+      !market ||
+      market === "Select" ||
+      !selectedbrand ||
+      selectedbrand === "Select" ||
+      !selectedyear ||
+      selectedyear === "Select"
+    ) {
+      return;
+    }
+
+    fetchdatasettable2();
+  }, [
+    selectedscenarioname,
+    selectedscenarionametimestamp,
+    market,
+    selectedbrand,
+    selectedyear
+  ]);
+
   const handlesimulate = async (newname) => {
     if (UserService.isLoggedIn()) {
       if (selectedyear && selectedyear !== "Select" && market && market !== "Select" && selectedscenarioname && selectedscenarioname !== "Select" && selectedbrand && selectedbrand !== "Select") {
