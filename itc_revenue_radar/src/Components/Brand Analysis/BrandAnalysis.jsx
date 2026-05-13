@@ -1883,8 +1883,11 @@ function BrandAnalysis() {
         color: var(--rr-text-muted);
       }
 
-      /* for typed date text */
+      /* Native date UI: typing + calendar (appearance:none on .ba-input would strip both in WebKit) */
       .ba-input[type="date"] {
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
         color-scheme: dark;
       }
 
@@ -1898,10 +1901,10 @@ function BrandAnalysis() {
         color-scheme: dark;
       }
 
-      /* calendar icon */
+      /* calendar icon — rely on color-scheme above; invert(1) broke light/dark visibility */
       .ba-input[type="date"]::-webkit-calendar-picker-indicator {
         cursor: pointer;
-        filter: var(--rr-calendar-icon-filter, invert(1));
+        filter: var(--rr-calendar-icon-filter, none);
         opacity: 0.9;
       }
 

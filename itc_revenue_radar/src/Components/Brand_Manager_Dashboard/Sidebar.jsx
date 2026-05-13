@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {
-  FaUserCircle,
+  FaUser,
   FaChartLine,
   FaMoneyBillWave,
   FaChartBar,
@@ -79,8 +79,8 @@ const Sidebar = ({ collapsed, setCollapsed, theme = "light" }) => {
           className={`sidebar-user-card ${collapsed ? "justify-content-center" : ""}`}
           title={collapsed ? userName : ""}
         >
-          <div className="sidebar-user-avatar">
-            <FaUserCircle />
+          <div className="sidebar-user-avatar" aria-hidden="true">
+            <FaUser className="sidebar-user-avatar-icon" size={20} />
           </div>
 
           {!collapsed && (
@@ -273,8 +273,12 @@ const Sidebar = ({ collapsed, setCollapsed, theme = "light" }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.55rem;
           box-shadow: 0 2px 8px rgba(23, 162, 184, 0.25);
+        }
+
+        .sidebar-user-avatar-icon {
+          display: block;
+          flex-shrink: 0;
         }
 
         .modern-sidebar .sidebar-user-name {

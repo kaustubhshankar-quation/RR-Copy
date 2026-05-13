@@ -3,7 +3,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import FooterPages from "../Footer/FooterPages";
 import { useSelector } from "react-redux";
-import ChatBot from "./ChatBot/ChatBot_API_v2";
+import ChatBot from "./ChatBot/ChatBot_API_v2_optimized";
 
 const IndexPage = ({ theme = "light", toggleTheme }) => {
   const [collapsed, setCollapsed] = useState(false);

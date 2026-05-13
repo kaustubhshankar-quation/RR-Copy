@@ -9,8 +9,7 @@ const _kc = new Keycloak('/keycloak.json');
  */
 const initKeycloak = (onAuthenticatedCallback) => {
   document.getElementById("root").innerHTML = `
-    <div style="
-      min-height:100vh;
+    <div class="rr-keycloak-auth" style="
       display:flex;
       align-items:center;
       justify-content:center;

@@ -1577,6 +1577,9 @@ function MarketAnalysis() {
       }
 
       .ma-input[type="date"] {
+        appearance: auto;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
         color-scheme: dark;
       }
 
@@ -1590,7 +1593,7 @@ function MarketAnalysis() {
 
       .ma-input[type="date"]::-webkit-calendar-picker-indicator {
         cursor: pointer;
-        filter: var(--rr-calendar-icon-filter, invert(1));
+        filter: var(--rr-calendar-icon-filter, none);
         opacity: 0.9;
       }
 

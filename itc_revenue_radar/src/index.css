@@ -1,6 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+:root {
+  --rr-zoom: 1;
+  --rr-zoom-vh: 100vh;
+  --rr-zoom-vw: 100vw;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -8,6 +14,58 @@ body {
   color: #1a1a1a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body[data-chatbot-fullscreen="true"] {
+  overflow: hidden;
+}
+
+@media (min-width: 992px) and (max-width: 1600px) {
+  :root {
+    --rr-zoom: 0.7;
+    --rr-zoom-vh: calc(100vh / var(--rr-zoom));
+    --rr-zoom-vw: calc(100vw / var(--rr-zoom));
+  }
+
+  body {
+    zoom: var(--rr-zoom);
+  }
+
+  .rr-app-shell, .rr-app-main, .dashboard-container, .main-container {
+    min-height: var(--rr-zoom-vh) !important;
+  }
+  .rr-sidebar, .modern-sidebar {
+    height: var(--rr-zoom-vh) !important;
+    min-height: var(--rr-zoom-vh) !important;
+  }
+  .chatbot-page, .chatbot-sidebar, .chatbot-main {
+    height: var(--rr-zoom-vh) !important;
+    min-height: var(--rr-zoom-vh) !important;
+  }
+  .rr-loader-shell {
+    min-height: calc(52vh / var(--rr-zoom)) !important;
+  }
+  .modal, .modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: var(--rr-zoom-vw) !important;
+    height: var(--rr-zoom-vh) !important;
+  }
+  .modal {
+    max-width: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    z-index: 2000 !important;
+  }
+  .modal-backdrop { z-index: 1990 !important; }
+  .modal-dialog { max-width: min(1140px, calc(var(--rr-zoom-vw) - 40px)) !important; }
+}
+
+/* Keycloak pre-React shell — viewport sizing (992–1600 band uses same vars as body zoom) */
+.rr-keycloak-auth {
+  min-height: var(--rr-zoom-vh);
+  width: var(--rr-zoom-vw);
+  max-width: none;
 }
 
 code {
