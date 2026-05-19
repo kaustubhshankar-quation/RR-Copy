@@ -51,7 +51,7 @@ import BrandSalesPerformance from "./Components/Brand_Manager_Dashboard/BrandSal
 import MediaSalesVsSpends from "./Components/Brand_Manager_Dashboard/MediaSalesVsSpends";
 import MediaWiseROI from "./Components/Brand_Manager_Dashboard/MediaWiseROI";
 import RegionWiseDetail from "./Components/Brand_Manager_Dashboard/RegionWiseDetail";
-import { ChatBotPage } from "./Components/Brand_Manager_Dashboard/ChatBot/ChatBot_API_v2_optimized";
+import { ChatBotPage } from "./Components/Brand_Manager_Dashboard/ChatBot/ChatBot_API_v2";
 
 // Global CSS
 // import "./Assets/css/css.css";

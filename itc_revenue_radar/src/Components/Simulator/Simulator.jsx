@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import ExceptionVariables from '../JSON Files/ExceptionVariables.json'
 import { useState, useEffect, useRef } from "react";
 import table from '../JSON Files/table.json'
@@ -33,11 +33,12 @@ import SingleBarChart8 from "./SingleBarChart8";
 import maskedBrandOption from '../JSON Files/MaskedBrandOption.json'
 import unMaskedBrandOption from '../JSON Files/MaskedBrandOption.json'
 import { toast } from "react-toastify";
+import { consumeScenarioPrefill } from "../Brand_Manager_Dashboard/ChatBot/revenueBotChatCore";
 const { REACT_APP_REDIRECT_URI } = process.env;
 const { REACT_APP_UPLOAD_DATA } = process.env;
 const { REACT_APP_UPLOAD_DATA2 } = process.env;
-const SCENARIO_PREFILL_KEY = "revenue_chat_scenario_prefill";
 const XLSX = require("xlsx");
+
 function Simulator() {
   const [savedmasterscenarioname, setsavedmasterscenarioname] = useState("")
   const [isprocessing, setisprocessing] = useState(false)
@@ -109,13 +110,34 @@ function Simulator() {
   const [tablepredictionsdataset, settablepredictionsdataset] = useState([]);
   const [tablecontributiondataset, settablecontributiondataset] = useState([]);
   const sectionRef = useRef(null);
-  const [chatbotPrefill, setChatbotPrefill] = useState(null);
 
   const [scenarioNameErrorFlag, setScenarioNameError] = useState(false)
+  const chatbotPrefillRef = useRef(false)
+
+  const runSimulate = () => {
+    if (isprocessing || loader) return;
+    if (!chatbotPrefillRef.current) fetchdatasettable2();
+    handlesimulate();
+  };
 
   useEffect(() => {
-    handlevariablesfetchfybrand()
+    handlevariablesfetchfybrand();
+    const prefill = consumeScenarioPrefill();
+    if (!prefill) return;
+    chatbotPrefillRef.current = Boolean(prefill.from_chatbot);
+    if (prefill.fy) setselectedyear(prefill.fy);
+    if (prefill.brand) setselectedbrand(prefill.brand);
+    if (prefill.market) setmarket(prefill.market);
+    if (prefill.timetype) settimetype(prefill.timetype);
+    if (prefill.scenario_name) {
+      setscenarionewoldscreen(prefill.scenarionewoldscreen || "old");
+      setselectedscenarioname(prefill.scenario_name);
+    }
+    if (prefill.scenario_timestamp) {
+      setselectedscenarionametimestamp(prefill.scenario_timestamp);
+    }
   }, []);
+
   useEffect(() => {
     handlefetchmarket()
     handlevariablesfetch()
@@ -123,38 +145,6 @@ function Simulator() {
   useEffect(() => {
     handlescenariosfetch()
   }, [market])
-
-  useEffect(() => {
-    try {
-      const rawPrefill = localStorage.getItem(SCENARIO_PREFILL_KEY);
-      if (!rawPrefill) return;
-      const parsedPrefill = JSON.parse(rawPrefill);
-      if (!parsedPrefill || typeof parsedPrefill !== "object") return;
-      setChatbotPrefill(parsedPrefill);
-      setscenarionewoldscreen("old");
-      if (parsedPrefill.fy) setselectedyear(parsedPrefill.fy);
-      if (parsedPrefill.brand) setselectedbrand(parsedPrefill.brand);
-      if (parsedPrefill.market) setmarket(parsedPrefill.market);
-      if (parsedPrefill.scenario_name) setselectedscenarioname(parsedPrefill.scenario_name);
-      if (parsedPrefill.scenario_timestamp) setselectedscenarionametimestamp(parsedPrefill.scenario_timestamp);
-      setdisplaynames2((prev) => ({
-        ...prev,
-        ...(parsedPrefill.brand ? { brand: parsedPrefill.brand } : {}),
-        ...(parsedPrefill.market ? { market: parsedPrefill.market } : {}),
-        ...(parsedPrefill.fy ? { fy: parsedPrefill.fy } : {}),
-        ...(parsedPrefill.scenario_name ? { scenario: parsedPrefill.scenario_name } : {}),
-      }));
-      localStorage.removeItem(SCENARIO_PREFILL_KEY);
-    } catch {
-      localStorage.removeItem(SCENARIO_PREFILL_KEY);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!chatbotPrefill?.scenario_name || !Array.isArray(scenariooptions) || scenariooptions.length === 0) return;
-    const matchedScenario = scenariooptions.find((option) => option?.value === chatbotPrefill.scenario_name);
-    if (matchedScenario?.timestamp) setselectedscenarionametimestamp(matchedScenario.timestamp);
-  }, [chatbotPrefill, scenariooptions]);
 
   const today1 = new Date();
   const currentYear = today1.getFullYear();
@@ -1383,15 +1373,12 @@ function Simulator() {
           }
 
           else {
-
             dispatch(
               getNotification({
                 message: `There is no valid data to display for selected brand and scenario combination`,
                 type: "default",
               })
-
             );
-
             setresultscreen2(false)
           }
 
@@ -2455,6 +2442,7 @@ function Simulator() {
   };
 
   useEffect(() => {
+    if (chatbotPrefillRef.current) return;
     if (
       !selectedscenarioname ||
       selectedscenarioname === "Select" ||
@@ -4142,10 +4130,7 @@ function Simulator() {
                 <div
                   className="sim-submit-cta"
                   type="button"
-                  onClick={() => {
-                    fetchdatasettable2();
-                    handlesimulate();
-                  }}
+                  onClick={runSimulate}
                 >
                   <span>Simulate <iconify-icon icon="iconamoon:arrow-right-2-bold" /></span>
                 </div>
@@ -4753,43 +4738,43 @@ function Simulator() {
                             { label: "Old Scenarios", value: "old" },
                             { label: "New Scenario", value: "new" },
                           ]}
-                          value={
-                            scenarionewoldscreen
-                              ? {
-                                label:
-                                  scenarionewoldscreen === "old"
-                                    ? "Old Scenarios"
-                                    : scenarionewoldscreen === "new"
-                                      ? "New Scenario"
-                                      : "Select",
-                                value: scenarionewoldscreen,
-                              }
-                              : { label: "Select", value: "select" }
-                          }
-                          onChange={(option) => {
-                            const value = option?.value || "select";
-                            if (market && selectedbrand && market !== "Select" && selectedbrand !== "Select") {
-                              setscenarionewoldscreen(value);
-                              setviewscenariodatatable(false);
-                              setviewscenariobtn(false);
-                              setuploadfiledata([]);
-                              setviewnewbasescenariodata(false);
-                              setviewannualoptimizeplan(false);
-                              settimetype("");
-                              setselectedscenarioname("");
-                            } else {
-                              dispatch(
-                                getNotification({
-                                  message: "Please select brand and market!",
-                                  type: "danger",
-                                })
-                              );
+                            value={
+                              scenarionewoldscreen
+                                ? {
+                                  label:
+                                    scenarionewoldscreen === "old"
+                                      ? "Old Scenarios"
+                                      : scenarionewoldscreen === "new"
+                                        ? "New Scenario"
+                                        : "Select",
+                                  value: scenarionewoldscreen,
+                                }
+                                : { label: "Select", value: "select" }
                             }
-                          }}
-                          menuPortalTarget={document.body}
-                          menuPosition="fixed"
-                          styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-                        />
+                            onChange={(option) => {
+                              const value = option?.value || "select";
+                              if (market && selectedbrand && market !== "Select" && selectedbrand !== "Select") {
+                                setscenarionewoldscreen(value);
+                                setviewscenariodatatable(false);
+                                setviewscenariobtn(false);
+                                setuploadfiledata([]);
+                                setviewnewbasescenariodata(false);
+                                setviewannualoptimizeplan(false);
+                                settimetype("");
+                                setselectedscenarioname("");
+                              } else {
+                                dispatch(
+                                  getNotification({
+                                    message: "Please select brand and market!",
+                                    type: "danger",
+                                  })
+                                );
+                              }
+                            }}
+                            menuPortalTarget={document.body}
+                            menuPosition="fixed"
+                            styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                          />
                       </div>
                     </div>
 
@@ -4945,16 +4930,13 @@ function Simulator() {
                       </>
                     )}
 
-                    {scenarionewoldscreen === "old" && selectedscenarioname !== "Base Scenario" && (
-                      <div className="mt-2 d-flex justify-content-center">
+                    {scenarionewoldscreen === "old" &&
+                      selectedscenarioname !== "Base Scenario" && (
+                      <div className="mt-3">
                         <div
-                          className="sim-submit-cta mt-3"
+                          className="sim-submit-cta"
                           type="button"
-                          disabled={isprocessing}
-                          onClick={() => {
-                            fetchdatasettable2();
-                            handlesimulate();
-                          }}
+                          onClick={runSimulate}
                         >
                           <span>
                             Simulate <iconify-icon icon="iconamoon:arrow-right-2-bold" />

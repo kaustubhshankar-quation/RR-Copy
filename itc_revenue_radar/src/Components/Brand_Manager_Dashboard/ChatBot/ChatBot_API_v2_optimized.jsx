@@ -1,15 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsRobot } from "react-icons/bs";
-import { VscChromeMinimize } from "react-icons/vsc";
 import axios from "axios";
 import "./ChatBot.css";
-import UserService from "../../../services/UserService";
 
 // ─── Constants ───
 const CHAT_STORAGE_KEY = "revenue_chat_sessions";
 const POPUP_TRANSFER_KEY = "revenue_chat_popup_transfer";
-const POPUP_RESTORE_OPEN_KEY = "revenue_chat_restore_popup";
 const SCENARIO_PREFILL_KEY = "revenue_chat_scenario_prefill";
 const DEPLOYED_API = "https://revenue.radar.bot.api.quation.co.in/chatbot/scenario/ask";
 const CONFIRM_API = "https://revenue.radar.bot.api.quation.co.in/chatbot/scenario/confirm";
@@ -556,20 +553,6 @@ const ChatPopup = ({ theme, onClose }) => {
   useEffect(() => { setTimeout(() => inputRef.current?.focus(), 100); }, []);
 
   useEffect(() => {
-    try {
-      if (localStorage.getItem(POPUP_RESTORE_OPEN_KEY) !== "1") return;
-      localStorage.removeItem(POPUP_RESTORE_OPEN_KEY);
-      const transferred = localStorage.getItem(POPUP_TRANSFER_KEY);
-      if (!transferred) return;
-      const parsed = JSON.parse(transferred);
-      if (Array.isArray(parsed) && parsed.length) {
-        setMessages(parsed.map(m => ({ ...m, time: new Date(m.time) })));
-      }
-      localStorage.removeItem(POPUP_TRANSFER_KEY);
-    } catch { /* ignore */ }
-  }, []);
-
-  useEffect(() => {
     if (!messages.length) return;
     const sessions = loadSessions();
     const existing = sessions.find(s => s.id === currentChatId);
@@ -627,7 +610,7 @@ const ChatPopup = ({ theme, onClose }) => {
   const handleMaximize = () => {
     if (messages.length) localStorage.setItem(POPUP_TRANSFER_KEY, JSON.stringify(messages));
     setMaximizing(true);
-    setTimeout(() => { navigate("/chatbot"); setMaximizing(false); onClose(); }, 450);
+    setTimeout(() => { window.open("/chatbot", "_blank"); setMaximizing(false); onClose(); }, 450);
   };
 
   const handleConfirmScenario = async (msg, messageIndex) => {
@@ -740,29 +723,83 @@ const ChatPopup = ({ theme, onClose }) => {
   );
 };
 
-// ─── Floating button (fixed position; opens/closes popup on click) ───
+// ─── Floating button ───
 const ChatBot_API_v2 = ({ theme }) => {
+  const btnRef = useRef(null);
+  const pointerIdRef = useRef(null);
+  const movedRef = useRef(false);
+  const startRef = useRef({ x: 0, y: 0, left: 0, top: 0 });
   const [popupOpen, setPopupOpen] = useState(false);
+  const [launcherPos, setLauncherPos] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    try {
-      if (localStorage.getItem(POPUP_RESTORE_OPEN_KEY) === "1") setPopupOpen(true);
-    } catch { /* ignore */ }
-  }, []);
+    if (!popupOpen) return;
+    // When popup opens, reset launcher to default fixed bottom-right position.
+    setLauncherPos(null);
+    pointerIdRef.current = null;
+    movedRef.current = false;
+    setIsDragging(false);
+  }, [popupOpen]);
+
+  const handlePointerDown = (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    const el = btnRef.current;
+    if (!el) return;
+    el.setPointerCapture?.(e.pointerId);
+    const rect = el.getBoundingClientRect();
+    pointerIdRef.current = e.pointerId;
+    movedRef.current = false;
+    startRef.current = { x: e.clientX, y: e.clientY, left: rect.left, top: rect.top };
+  };
+
+  const handlePointerMove = (e) => {
+    if (pointerIdRef.current !== e.pointerId) return;
+    if (popupOpen) return;
+    const el = btnRef.current;
+    if (!el) return;
+    const dx = e.clientX - startRef.current.x;
+    const dy = e.clientY - startRef.current.y;
+    if (!movedRef.current && Math.hypot(dx, dy) < 6) return;
+    if (!movedRef.current) setIsDragging(true);
+    movedRef.current = true;
+    const maxX = Math.max(0, window.innerWidth - el.offsetWidth);
+    const maxY = Math.max(0, window.innerHeight - el.offsetHeight);
+    const x = Math.min(Math.max(0, startRef.current.left + dx), maxX);
+    const y = Math.min(Math.max(0, startRef.current.top + dy), maxY);
+    setLauncherPos({ x, y });
+  };
+
+  const handlePointerUp = (e) => {
+    if (pointerIdRef.current !== e.pointerId) return;
+    const el = btnRef.current;
+    el?.releasePointerCapture?.(e.pointerId);
+    pointerIdRef.current = null;
+    setIsDragging(false);
+    if (!movedRef.current) setPopupOpen((p) => !p);
+  };
+
+  const handlePointerCancel = (e) => {
+    if (pointerIdRef.current !== e.pointerId) return;
+    const el = btnRef.current;
+    el?.releasePointerCapture?.(e.pointerId);
+    pointerIdRef.current = null;
+    setIsDragging(false);
+  };
 
   return (
     <>
       <div
-        className={`chatbot-nav-wrapper ${theme}-theme${popupOpen ? " popup-open" : ""}`}
+        ref={btnRef}
+        className={`chatbot-nav-wrapper ${theme}-theme${popupOpen ? " popup-open" : ""}${isDragging ? " dragging" : ""}`}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+        style={launcherPos ? { left: `${launcherPos.x}px`, top: `${launcherPos.y}px`, right: "auto", bottom: "auto" } : undefined}
         title="✨ Ask me anything about your Revenue!"
       >
-        <button
-          type="button"
-          className={`chatbot-nav-btn ${theme}-theme`}
-          onClick={() => setPopupOpen((p) => !p)}
-          aria-expanded={popupOpen}
-          aria-label={popupOpen ? "Close Revenue assistant" : "Open Revenue assistant"}
-        >
+        <button className={`chatbot-nav-btn ${theme}-theme`}>
           <span className="chatbot-nav-icon" role="img" aria-label="AI bot"><AiIcon size={38} /></span>
         </button>
       </div>
@@ -775,11 +812,6 @@ const ChatBot_API_v2 = ({ theme }) => {
 export const ChatBotPage = ({ theme: themeProp }) => {
   const navigate = useNavigate();
   const theme = themeProp || "light";
-  const sidebarUserName =
-    UserService.getFullName() ||
-    UserService.getUsername() ||
-    "Chatbot User";
-
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -894,27 +926,14 @@ export const ChatBotPage = ({ theme: themeProp }) => {
     }
   };
 
-  const handleMinimizeToCockpit = () => {
-    try {
-      if (messages.length) localStorage.setItem(POPUP_TRANSFER_KEY, JSON.stringify(messages));
-      else localStorage.removeItem(POPUP_TRANSFER_KEY);
-      localStorage.setItem(POPUP_RESTORE_OPEN_KEY, "1");
-    } catch { /* ignore */ }
-    navigate("/cockpit");
-  };
-
-  const handleBackToBrandCockpit = () => {
-    navigate("/cockpit");
-  };
-
   return (
     <div className={`chatbot-page ${theme}-theme`}>
       <aside className="chatbot-sidebar">
         <div className="sidebar-user">
           <div className="sidebar-user-avatar"><i className="fas fa-user" /></div>
           <div className="sidebar-user-info">
-            <span className="sidebar-user-name">{sidebarUserName}</span>
-            <span className="sidebar-user-role">Chatbot User</span>
+            <span className="sidebar-user-name">MANAGER_BRAND_2</span>
+            <span className="sidebar-user-role">Dashboard User</span>
           </div>
         </div>
         <button className="sidebar-newchat-btn" onClick={handleNewChat} title="New Chat">
@@ -940,20 +959,6 @@ export const ChatBotPage = ({ theme: themeProp }) => {
       <div className="chatbot-main">
         <div className="chatbot-topbar">
           <span className="chatbot-title-text"><AiIcon size={30} /> Revenue Chat</span>
-          <div className="chatbot-topbar-actions">
-            <button type="button" className="chatbot-topbar-btn chatbot-topbar-btn-primary" onClick={handleBackToBrandCockpit} title="Leave full-page chat and return to Brand Cockpit">
-              <i className="fas fa-arrow-left" aria-hidden /> Back to Brand Cockpit
-            </button>
-            <button
-              type="button"
-              className="chatbot-topbar-btn chatbot-topbar-btn-icon-only"
-              onClick={handleMinimizeToCockpit}
-              title="Minimize to floating chat"
-              aria-label="Minimize to floating chat"
-            >
-              <VscChromeMinimize className="chatbot-minimize-icon" size={20} aria-hidden />
-            </button>
-          </div>
         </div>
 
         {messages.length === 0 ? (
